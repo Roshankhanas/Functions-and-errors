@@ -1,0 +1,26 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.0;
+
+contract ScienceProject {
+
+    uint256 public scientistsCount;
+    uint256 public projectYear;
+
+    function approvalCommittee(uint256 _scientistsApproval, uint256 _projectYear) external {
+        // Set scientists count
+        scientistsCount = _scientistsApproval;
+
+        // Assert that the project year is 2010 or later
+        assert(_projectYear >= 2010);
+
+        // Considered as Invention if approved by 15 scientists
+        if (_scientistsApproval >= 15) {
+            revert("Considered as Invention");
+        }
+    }
+
+    function scientistEligibility(uint256 _scientistAge) external pure {
+        // Require minimum age of 35 for scientists
+        require(_scientistAge >= 35, "Not Considered as scientist");
+    }
+}
